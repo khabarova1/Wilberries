@@ -11,9 +11,13 @@ from selenium.webdriver.chrome.service import Service
 
 
 def setup_driver():
-    """Запускает Chrome с настройками для перехвата сетевого трафика."""
+    """Запускает/не запускает Chrome с настройками для перехвата сетевого трафика."""
     options = webdriver.ChromeOptions()
     options.set_capability("goog:loggingPrefs", {"performance": "ALL"})
+    # Без открытия окна браузера
+    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
     service = Service()
     return webdriver.Chrome(service=service, options=options)
 
